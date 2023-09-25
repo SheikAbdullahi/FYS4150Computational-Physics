@@ -9,5 +9,10 @@ This repository contains solutions and detailed explanations for problems encoun
 #### Overview
 The main focus of this repository is to solve and represent various computational problems involving equations, sparse matrices, and dense matrices, demonstrating the application of computational methodologies in Physics. The solutions include detailed implementations, analytical comparisons, and graphical representations to offer a holistic understanding of the topics covered.
 
+#### Programming Languages and Tools Used
+
+The computational problems in this project will be primarily solved using \texttt{C++}, owing to its efficiency and performance capabilities. \texttt{C++} is employed extensively for tasks requiring high computational power and precise control over system resources. For tasks related to data visualization and other auxiliary processes, \texttt{Python} will be used, leveraging its extensive libraries and user-friendly syntax to generate plots and perform lighter computational tasks. This hybrid approach allows for leveraging the strengths of both programming languages to effectively address the diverse range of requirements presented by the project.
+
+
 #### License:
 This project is open source, and the detailed license information can be found in the LICENSE file in the repository.
