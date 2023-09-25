@@ -11,7 +11,7 @@ The main focus of this repository is to solve and represent various computationa
 
 #### Programming Languages and Tools Used
 
-The computational problems in this project will be primarily solved using \texttt{C++}, owing to its efficiency and performance capabilities. \texttt{C++} is employed extensively for tasks requiring high computational power and precise control over system resources. For tasks related to data visualization and other auxiliary processes, \texttt{Python} will be used, leveraging its extensive libraries and user-friendly syntax to generate plots and perform lighter computational tasks. This hybrid approach allows for leveraging the strengths of both programming languages to effectively address the diverse range of requirements presented by the project.
+The computational problems in this project will be primarily solved using C++, owing to its efficiency and performance capabilities. C++ is employed extensively for tasks requiring high computational power and precise control over system resources. For tasks related to data visualization and other auxiliary processes, Python will be used, leveraging its extensive libraries and user-friendly syntax to generate plots and perform lighter computational tasks. This hybrid approach allows for leveraging the strengths of both programming languages to effectively address the diverse range of requirements presented by the project.
 
 
 #### License:
