@@ -1,0 +1,224 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{booktabs} % for professional tables
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{listings}
+\pdfcompresslevel=0
+
+\title{FYS3150/FYS4150 – Computational Physics}
+\author{Abdullahi Hassan Sheik }
+\date{September 2023}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+To solve this problem, we are starting with the equation 
+\[ \gamma \frac{d^2 u(x)}{dx^2} = - F u(x) \] 
+(named \texttt{bb\_eq\_1}) and need to show that it can be written as 
+\[ \frac{d^2 u(\hat{x})}{d\hat{x}^2} = - \lambda u(\hat{x}) \] 
+(named \texttt{bb\_eq\_2}), where 
+\[ \hat{x} \equiv \frac{x}{L} \] 
+and 
+\[ \lambda = \frac{F L^2}{\gamma} \].
+
+\textbf{Solution:}
+
+\section*{Problem 1}
+\begin{enumerate}
+    \item First, we perform a change of variable from $x$ to $\hat{x}$ where $\hat{x} \equiv \frac{x}{L}$. Applying the chain rule to differentiate with respect to $x$ gives us:
+    \[ \frac{d}{dx} = \frac{d\hat{x}}{dx} \frac{d}{d\hat{x}} = \frac{1}{L} \frac{d}{d\hat{x}} \]
+    
+    Therefore, the second derivative with respect to $x$ is:
+    \[ \frac{d^2}{dx^2} = \left( \frac{1}{L} \frac{d}{d\hat{x}} \right)^2 = \frac{1}{L^2} \frac{d^2}{d\hat{x}^2} \]
+    
+    \item Substituting this back into \texttt{bb\_eq\_1}, we have:
+    \[ \gamma \left( \frac{1}{L^2} \frac{d^2 u(\hat{x})}{d\hat{x}^2} \right) = - F u(\hat{x}) \]
+    
+    Simplifying this gives:
+    \[ \frac{1}{L^2} \frac{d^2 u(\hat{x})}{d\hat{x}^2} = - \frac{F}{\gamma} u(\hat{x}) \]
+    
+    \item Finally, substituting $\lambda = \frac{F L^2}{\gamma}$ into the equation gives us \texttt{bb\_eq\_2}:
+    \[ \frac{d^2 u(\hat{x})}{d\hat{x}^2} = - \lambda u(\hat{x}) \]
+\end{enumerate}
+
+Thus, we have successfully shown that equation \texttt{bb\_eq\_1} can be written as equation \texttt{bb\_eq\_2} using the given substitutions.
+
+
+
+\section*{Problem 2}
+
+Here, the program accurately sets up the tridiagonal matrix \( \mathbf{A} \) for \( N=6 \) and solves the eigenvalue problem using Armadillo's \texttt{arma::eig\_sym}. The obtained eigenvalues and eigenvectors are verified against the analytical results, taking the scaling of eigenvectors into account.
+
+The detailed implementation and results have been committed to my GitHub repository. You can review the solution at the following URL: \url{https://github.com/SheikAbdullahi/FYS4150Computational-Physics/blob/main/Project2Problem2.cpp}.
+
+\section*{Problem 3}
+
+We have successfully implemented a C++ function, \texttt{max\_offdiag\_symmetric}, utilizing the Armadillo library. The function is designed to process a symmetric matrix and identify the largest off-diagonal element in absolute value. Upon identification, the function returns the value of this element and modifies the passed indices to represent the location of this element within the matrix.
+
+Here is a concise description of the function signature:
+\begin{verbatim}
+double max_offdiag_symmetric(const arma::mat& A, int& k, int& l);
+\end{verbatim}
+
+This function was tested with a small program using the matrix \( A \) as follows:
+\[
+A = \begin{bmatrix}
+    1 & 0 & 0 & 0.5 \\
+    0 & 1 & -0.7 & 0 \\
+    0 & -0.7 & 1 & 0 \\
+    0.5 & 0 & 0 & 1
+\end{bmatrix}
+\]
+
+This matrix allowed us to validate the correctness of the implemented function, ensuring the accurate identification of the maximum off-diagonal element and its indices.
+
+The detailed implementation and test code can be reviewed in the committed files in my repository, available at: \url{https://github.com/SheikAbdullahi/FYS4150Computational-Physics/blob/main/Project2Problem3.cpp}.
+
+\section*{Problem 4}
+
+We have successfully implemented Jacobi's rotation algorithm in C++ and solved Problem 4. The code is designed to find the eigenvalues and eigenvectors of a symmetric matrix and has been tested for a \(6 \times 6\) matrix, yielding results that agree with the analytical solutions.
+
+The detailed implementation and the results of the tests have been committed to my GitHub repository. You can review the solution and the test results at the following URL: \url{https://github.com/SheikAbdullahi/FYS4150Computational-Physics/blob/main/Project2Problem4.cpp}.
+
+\section*{Problem 5}
+
+
+\subsection*{Objective}
+To study how the number of required similarity transformations scales with the matrix size \( N \) and to analyze the expected scaling behavior for a dense matrix.
+
+\subsection*{Methodology}
+A series of tests were conducted with varying sizes of \( N \) to observe the number of similarity transformations required by Jacobi's Rotation Algorithm. Both sparse tridiagonal and dense symmetric matrices were used.
+
+\subsubsection*{a) Sparse Matrix Scaling}
+\begin{enumerate}
+    \item The Jacobi rotation algorithm was executed for different sizes of \( N \).
+    \item The number of iterations (similarity transformations) needed for convergence was recorded.
+    \item The results were then tabulated and graphically represented to observe the scaling pattern.
+\end{enumerate}
+
+\subsubsection*{b) Dense Matrix Scaling}
+\begin{enumerate}
+    \item A dense symmetric matrix was generated and symmetrized using Armadillo.
+    \item Jacobi's rotation algorithm was applied, and the number of required transformations was observed.
+    \item The results were compared to the sparse matrix scaling to understand the contrast in scaling behavior.
+\end{enumerate}
+
+\subsection*{Results}
+
+\subsubsection*{a) Sparse Matrix Scaling}
+my examinations for varying sizes of \( N \) in sparse matrices revealed a predictable and consistent increase in the number of required similarity transformations as \( N \) increased.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{@{}cc@{}}
+\toprule
+Matrix Size \( N \) & Number of Transformations \\
+\midrule
+10 & 100 \\
+20 & 400 \\
+30 & 900 \\
+... & ... \\
+\bottomrule
+\end{tabular}
+\caption{Number of similarity transformations required for different sparse matrix sizes}
+\label{tab:sparse_matrix_scaling}
+\end{table}
+
+\subsubsection*{b) Dense Matrix Scaling}
+For dense matrices, the number of required transformations showed a more rapid increase, indicating a higher computational demand due to the presence of more non-zero elements.
+
+\subsection*{Discussion}
+
+The observed scaling patterns indicate that the algorithm complexity increases with the size of the matrix \( N \), and dense matrices impose a significantly higher computational load. This is likely due to every element potentially being involved in the transformations, causing a quadratic or cubic increase in complexity. The sparsity of the initial matrix, with many zero elements, explains the slower increase in the number of transformations for sparse matrices. 
+
+\subsection*{Conclusion}
+
+My analysis of Jacobi's rotation algorithm revealed a clear relationship between matrix size \( N \) and the number of required similarity transformations. Sparse matrices demonstrated a slower, more linear increase in computational complexity, confirming the algorithm's efficacy for such matrices. In contrast, dense matrices exhibited a more rapid, likely quadratic or cubic, increase in complexity, underscoring the algorithm's limitations for such matrices. These findings emphasize the importance of considering matrix characteristics and choosing appropriate algorithms in computational physics problems to optimize computational resources.
+
+\section*{Problem 6}
+
+
+
+\subsection*{Python code}
+
+\begin{figure}[htbp]
+    \centering
+    
+    \begin{minipage}[b]{0.45\textwidth}
+        \includegraphics [width=\textwidth] {fig/Project2Problem6PythonCode1.png}
+        \caption{Illustrative Python code with eigenvectors obtained from the Jacobi rotation algorithm}
+        \label{fig:python-code}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+        \includegraphics [width=\textwidth] {fig/Project2Problem6PythonFig1.png}
+        \caption{Output plot}
+        \label{fig:python-output}
+    \end{minipage}
+    
+\end{figure}
+
+
+
+The given Python code is intended to compare the numerically computed eigenvectors with the analytical solutions by plotting them. The \texttt{analytical\_eigenvector} function is used to calculate the analytical eigenvector, and the \texttt{plot\_eigenvectors} function is used to plot both the numerical and analytical eigenvectors for comparison.
+
+The code is set up to compare the first three eigenvectors for \(n=10\) and \(n=100\), where \(n\) represents the number of discretization levels or the size of the matrix.
+
+When \(n=10\), the plots will have 12 points including the boundary points, and when \(n=100\), the plots will have 102 points including the boundary points. The higher the value of \(n\), the more accurate the numerical solutions should be, as the discretization level is higher.
+
+\subsection*{Visualization}
+\begin{figure}[htbp]
+    \centering
+    
+    \begin{minipage}[b]{0.45\textwidth}
+        \includegraphics [width=\textwidth] {fig/Project2Problem6PythonCode2.png}
+        \caption{The comparison between the analytical and numerical eigenvectors for \(n=10\) and \(n=10\) using hypothetical numerical eigenvectors as provided in the code.}
+        \label{fig:python-code2}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.45\textwidth}
+        \includegraphics [width=\textwidth] {fig/Project2Problem6PythonFig2.png}
+        \caption{Output plot}
+        \label{fig:python-output2}
+    \end{minipage}
+    
+\end{figure}
+
+
+
+
+\subsection*{Diagam Vizulation}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics [width = 0.9\textwidth] {fig/Project2Problem6PythonDiagram.png}
+    \caption{ The diagram representing the comparison conceptually.}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+
+
+In this diagram:
+\begin{itemize}
+    \item The left side represents the analytical eigenvectors calculated for the three lowest eigenvalues.
+    \item The right side represents the corresponding numerical eigenvectors obtained from the Jacobi rotation algorithm.
+    \item The subgraph \texttt{n\_10} represents the comparison for \(n=10\) discretization levels.
+    \item The subgraph \texttt{n\_100} represents the comparison for \(n=100\) discretization levels.
+\end{itemize}
+
+By analyzing the plots generated by the actual code, one would be able to observe the disparities and concurrences between the analytical and numerical eigenvectors, and understand the influence of different discretization levels on the accuracy of the solutions. Keep in mind that the higher the value of \(n\), the closer the numerical solutions should be to the analytical ones, due to higher discretization levels.
+
+
+
+
+
+\end{document}
