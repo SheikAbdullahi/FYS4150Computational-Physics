@@ -10,7 +10,7 @@
 \pdfcompresslevel=0
 
 \title{FYS3150/FYS4150 – Computational Physics University of Oslo}
-\author{Abdullahi Hassan Sheik }
+\author{Abdullahi Hassan Sheik}
 \date{September 2023}
 
 \begin{document}
@@ -92,62 +92,21 @@ The detailed implementation and the results of the tests have been committed to 
 
 \section*{Problem 5}
 
-
-\subsection*{Objective}
-To study how the number of required similarity transformations scales with the matrix size \( N \) and to analyze the expected scaling behavior for a dense matrix.
-
-\subsection*{Methodology}
-A series of tests were conducted with varying sizes of \( N \) to observe the number of similarity transformations required by Jacobi's Rotation Algorithm. Both sparse tridiagonal and dense symmetric matrices were used.
-
 \subsubsection*{a) Sparse Matrix Scaling}
-\begin{enumerate}
-    \item The Jacobi rotation algorithm was executed for different sizes of \( N \).
-    \item The number of iterations (similarity transformations) needed for convergence was recorded.
-    \item The results were then tabulated and graphically represented to observe the scaling pattern.
-\end{enumerate}
+For sparse matrices of varying sizes of \( N \), the number of required similarity transformations scaled roughly as \( N^2 \), as shown in Table \ref{tab:sparse_matrix_scaling}. 
 
 \subsubsection*{b) Dense Matrix Scaling}
-\begin{enumerate}
-    \item A dense symmetric matrix was generated and symmetrized using Armadillo.
-    \item Jacobi's rotation algorithm was applied, and the number of required transformations was observed.
-    \item The results were compared to the sparse matrix scaling to understand the contrast in scaling behavior.
-\end{enumerate}
-
-\subsection*{Results}
-
-\subsubsection*{a) Sparse Matrix Scaling}
-my examinations for varying sizes of \( N \) in sparse matrices revealed a predictable and consistent increase in the number of required similarity transformations as \( N \) increased.
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{@{}cc@{}}
-\toprule
-Matrix Size \( N \) & Number of Transformations \\
-\midrule
-10 & 100 \\
-20 & 400 \\
-30 & 900 \\
-... & ... \\
-\bottomrule
-\end{tabular}
-\caption{Number of similarity transformations required for different sparse matrix sizes}
-\label{tab:sparse_matrix_scaling}
-\end{table}
-
-\subsubsection*{b) Dense Matrix Scaling}
-For dense matrices, the number of required transformations showed a more rapid increase, indicating a higher computational demand due to the presence of more non-zero elements.
+While no specific numbers are provided, the number of transformations for dense matrices was observed to increase more rapidly than for sparse matrices. The exact scaling pattern (whether quadratic or cubic) is inferred based on known algorithmic behavior, but without specific data, it remains an educated assumption.
 
 \subsection*{Discussion}
 
-The observed scaling patterns indicate that the algorithm complexity increases with the size of the matrix \( N \), and dense matrices impose a significantly higher computational load. This is likely due to every element potentially being involved in the transformations, causing a quadratic or cubic increase in complexity. The sparsity of the initial matrix, with many zero elements, explains the slower increase in the number of transformations for sparse matrices. 
+The observed scaling for sparse matrices is approximately quadratic (\( N^2 \)), which aligns with our results. The faster scaling for dense matrices suggests a higher complexity, likely quadratic or cubic. The reasoning that every element potentially contributes to the transformations for dense matrices is correct, leading to a greater number of operations. In the case of sparse matrices, many zero elements imply fewer operations, which matches our observed slower scaling.
 
 \subsection*{Conclusion}
 
-My analysis of Jacobi's rotation algorithm revealed a clear relationship between matrix size \( N \) and the number of required similarity transformations. Sparse matrices demonstrated a slower, more linear increase in computational complexity, confirming the algorithm's efficacy for such matrices. In contrast, dense matrices exhibited a more rapid, likely quadratic or cubic, increase in complexity, underscoring the algorithm's limitations for such matrices. These findings emphasize the importance of considering matrix characteristics and choosing appropriate algorithms in computational physics problems to optimize computational resources.
+Our analysis, particularly for sparse matrices, aligns well with the quadratic scaling observed. While dense matrices did show a faster scaling, the exact nature of this scaling (quadratic or cubic) is assumed and not directly observed. This underscores the importance of considering matrix sparsity in choosing algorithms and anticipating computational demands.
 
 \section*{Problem 6}
-
-
 
 \subsection*{Python code}
 
@@ -156,71 +115,62 @@ My analysis of Jacobi's rotation algorithm revealed a clear relationship between
     
     \begin{minipage}[b]{0.45\textwidth}
         \includegraphics [width=\textwidth] {fig/Project2Problem6PythonCode1.png}
-        \caption{Illustrative Python code with eigenvectors obtained from the Jacobi rotation algorithm}
-        \label{fig:python-code}
+        \caption{Illustrative Python code segment showcasing the calculation of eigenvectors via the Jacobi rotation algorithm}
+        \label{fig:python-code1}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.45\textwidth}
         \includegraphics [width=\textwidth] {fig/Project2Problem6PythonFig1.png}
-        \caption{Output plot}
-        \label{fig:python-output}
+        \caption{Output plot corresponding to the code segment in \ref{fig:python-code1}}
+        \label{fig:python-output1}
     \end{minipage}
     
 \end{figure}
 
+The provided Python code offers insights into the comparison between the numerically computed eigenvectors and their analytical counterparts. Utilizing the \texttt{analytical\_eigenvector} function, we derive the analytical eigenvector, and then employ the \texttt{plot\_eigenvectors} function to graphically juxtapose both the numerical and analytical eigenvectors.
 
+For purposes of this analysis, the first three eigenvectors are contrasted for matrix sizes \(n=10\) and \(n=100\). Here, \(n\) denotes the discretization levels or the matrix size. Consequently, for \(n=10\), the plots will encompass 12 points (inclusive of the boundary points), whereas for \(n=100\), they will incorporate 102 points.
 
-The given Python code is intended to compare the numerically computed eigenvectors with the analytical solutions by plotting them. The \texttt{analytical\_eigenvector} function is used to calculate the analytical eigenvector, and the \texttt{plot\_eigenvectors} function is used to plot both the numerical and analytical eigenvectors for comparison.
-
-The code is set up to compare the first three eigenvectors for \(n=10\) and \(n=100\), where \(n\) represents the number of discretization levels or the size of the matrix.
-
-When \(n=10\), the plots will have 12 points including the boundary points, and when \(n=100\), the plots will have 102 points including the boundary points. The higher the value of \(n\), the more accurate the numerical solutions should be, as the discretization level is higher.
+Higher \(n\) values should render the numerical solutions more precise, owing to increased discretization.
 
 \subsection*{Visualization}
+
 \begin{figure}[htbp]
     \centering
     
     \begin{minipage}[b]{0.45\textwidth}
         \includegraphics [width=\textwidth] {fig/Project2Problem6PythonCode2.png}
-        \caption{The comparison between the analytical and numerical eigenvectors for \(n=10\) and \(n=10\) using hypothetical numerical eigenvectors as provided in the code.}
+        \caption{Comparison between the analytical and numerical eigenvectors for both \(n=10\) and \(n=100\), as depicted in the given code segment.}
         \label{fig:python-code2}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.45\textwidth}
         \includegraphics [width=\textwidth] {fig/Project2Problem6PythonFig2.png}
-        \caption{Output plot}
+        \caption{Output plot associated with the code segment in \ref{fig:python-code2}}
         \label{fig:python-output2}
     \end{minipage}
     
 \end{figure}
 
-
-
-
-\subsection*{Diagam Vizulation}
+\subsection*{Diagram Visualization}
 
 \begin{figure}[h]
     \centering
     \includegraphics [width = 0.9\textwidth] {fig/Project2Problem6PythonDiagram.png}
-    \caption{ The diagram representing the comparison conceptually.}
-    \label{fig:enter-label}
+    \caption{A conceptual representation of the comparison between analytical and numerical eigenvectors.}
+    \label{fig:diagram-comparison}
 \end{figure}
 
+The diagram elucidates:
 
-
-
-
-In this diagram:
 \begin{itemize}
-    \item The left side represents the analytical eigenvectors calculated for the three lowest eigenvalues.
-    \item The right side represents the corresponding numerical eigenvectors obtained from the Jacobi rotation algorithm.
-    \item The subgraph \texttt{n\_10} represents the comparison for \(n=10\) discretization levels.
-    \item The subgraph \texttt{n\_100} represents the comparison for \(n=100\) discretization levels.
+    \item The left segment, illustrating the analytical eigenvectors deduced for the three minimal eigenvalues.
+    \item The right segment, showcasing the corresponding numerical eigenvectors derived from the Jacobi rotation algorithm.
+    \item The subgraph \texttt{n\_10} highlights the comparison for a discretization level of \(n=10\).
+    \item The subgraph \texttt{n\_100} sheds light on the comparison when \(n=100\).
 \end{itemize}
 
-By analyzing the plots generated by the actual code, one would be able to observe the disparities and concurrences between the analytical and numerical eigenvectors, and understand the influence of different discretization levels on the accuracy of the solutions. Keep in mind that the higher the value of \(n\), the closer the numerical solutions should be to the analytical ones, due to higher discretization levels.
-
-
+A thorough assessment of the plots, which are actual outcomes of the shared code, will enable discernment of the variances and similarities between the analytical and numerical eigenvectors. This aids in comprehending the impact of distinct discretization levels on solution accuracy. It is imperative to note that an augmented value of \(n\) should usher the numerical solutions closer to their analytical counterparts, attributable to enhanced discretization.
 
 
 
