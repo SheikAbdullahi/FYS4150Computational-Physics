@@ -1,38 +1,39 @@
-# README.md for Project 2 Repository
+# FYS3150/FYS4150 Computational Physics: Project 2
 
-## Repository File Descriptions
+## Overview
 
- **Introduction**: This section introduces the mathematical problem that needs to be solved. Specifically, it starts with the equation named `bb_eq_1` and shows the goal to express it as `bb_eq_2` using certain transformations.
+This repository contains the implementation and analysis for Project 2 of the course FYS3150/FYS4150 – Computational Physics at the University of Oslo. The project focuses on the exploration of matrices, eigenvalues, and eigenvectors through mathematical transformations and computational methods.
 
- **Problem 1**: This section provides a step-by-step transformation of `bb_eq_1` to `bb_eq_2` by changing variables and performing mathematical manipulations.
+## Repository Structure
 
-**Problem 2**: A summary of the program's ability to set up a tridiagonal matrix and solve the eigenvalue problem. The solution can be found in the given GitHub link.
+- **Introduction**: Overview of the central mathematical problem: the transformation of the equation `bb_eq_1` to `bb_eq_2`.
+  
+- **Problem 1**: Detailed transformation process of `bb_eq_1` to `bb_eq_2`, highlighting the variable changes and mathematical manipulations.
+  
+- **Problem 2**: Insight into the program's capability to establish a tridiagonal matrix and resolve the eigenvalue problem. Refer to the GitHub link for comprehensive implementation.
+  
+- **Problem 3**: Exploration and testing of a C++ function devised to pinpoint the largest off-diagonal element in any matrix.
+  
+- **Problem 4**: Deep dive into the deployment of Jacobi's rotation algorithm in C++, and its evaluation on a \(6 \times 6\) matrix.
+  
+- **Problem 5**: A discourse on the scaling methodologies of sparse matrices, culminating in a well-founded discussion and conclusion.
+  
+- **Problem 6**: Descriptive narrative on the Python script employed to juxtapose analytical and numerical eigenvectors, enriched with visualizations to enhance clarity.
+  
+- **LaTeX Document**: A comprehensive documentation detailing the entirety of the project's methodology and results. This can be found in the repository.
 
-**Problem 3**: Describes the creation and testing of a C++ function that identifies the largest off-diagonal element in a matrix. There's also a GitHub link for detailed implementation.
+## Project Essence
 
-**Problem 4**: Details the successful implementation of Jacobi's rotation algorithm in C++ and testing it for a \(6 \times 6\) matrix.
+Commencing with the initial equation `bb_eq_1`, the project endeavors to demonstrate its transformation to `bb_eq_2` through methodical mathematical substitutions. As the project progresses, it delves deeper into matrix manipulations, eigenvalue problems, and the contrast between analytical and numerical solutions, intertwining theory with practice.
 
-**Problem 5**: Discusses the scaling of sparse matrices and provides a discussion and conclusion based on the observations made during the project.
+The cohesive synergy between mathematical derivations, C++ coding, and Python-based visualizations establishes the robust foundation of this project.
 
-**Problem 6**: Provides a brief description of the Python code used to compare analytical and numerical eigenvectors. Visualizations (figures) are included in this section to provide a clearer understanding of the comparison, and they are structured using minipages to sit side-by-side.
+## Contributor
 
+**Abdullahi Hassan Sheik**
 
-## Project Description
+## Additional Resources
 
-This project, project 2 is part of FYS3150/FYS4150 – Computational Physics at the University of Oslo, aims to solve a series of problems related to matrices, eigenvalues, and eigenvectors.
+- **GitHub Repository**: [FYS4150Computational-Physics](https://github.com/SheikAbdullahi/FYS4150Computational-Physics)
 
-The main objective is to find solutions to a given problem statement, starting with an equation named `bb_eq_1` and showing that it can be transformed to another equation named `bb_eq_2` using mathematical substitutions. The project then moves on to deal with matrix operations, eigenvalue problems, and comparisons between analytical and numerical solutions.
-
-The complete project involves the derivation of formulas, writing and testing C++ code, and visualizing results using Python.
-
-For more detailed information, refer to the LaTeX document provided in the repository.
-
-## Contribution
-
-This project is completed by Abdullahi Hassan Sheik.
-
----
-
-**Link to GitHub Repository:** [FYS4150Computational-Physics](https://github.com/SheikAbdullahi/FYS4150Computational-Physics)
-
-**Date:** October 2023
+- **Date of Completion**: October 2023
