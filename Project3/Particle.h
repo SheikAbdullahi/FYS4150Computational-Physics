@@ -2,18 +2,24 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 
-#include <Eigen/Dense>
+#include <armadillo>
 
 class Particle {
 public:
-    Eigen::Vector3d position;
-    Eigen::Vector3d velocity;
-    double mass;
-    double charge;
+    // Member variables
+    double q;  // charge
+    double m;  // mass
+    arma::vec r;  // position
+    arma::vec v;  // velocity
 
-    Particle(const Eigen::Vector3d& pos, const Eigen::Vector3d& vel, double m, double q);
-    void updatePosition(double dt);
-    void updateVelocity(const Eigen::Vector3d& acceleration, double dt);
+    // Constructor
+    Particle(double charge, double mass, arma::vec position, arma::vec velocity);
+
+    // Method to update the particle's position with time step dt
+    void move(double dt);
+
+    // Method to print particle's properties
+    void print();
 };
 
 #endif

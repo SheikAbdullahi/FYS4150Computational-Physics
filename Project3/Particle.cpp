@@ -1,13 +1,18 @@
 // Particle.cpp
 #include "Particle.h"
+#include <iostream>
 
-Particle::Particle(const Eigen::Vector3d& pos, const Eigen::Vector3d& vel, double m, double q)
-    : position(pos), velocity(vel), mass(m), charge(q) {}
+// Constructor implementation
+Particle::Particle(double charge, double mass, arma::vec position, arma::vec velocity) : q(charge), m(mass), r(position), v(velocity) {}
 
-void Particle::updatePosition(double dt) {
-    position += velocity * dt;
+// Method to update the particle's position with time step dt
+void Particle::move(double dt) {
+    r += v * dt;  // Simple Euler integration for motion
 }
 
-void Particle::updateVelocity(const Eigen::Vector3d& acceleration, double dt) {
-    velocity += acceleration * dt;
+// Method to print particle's properties
+void Particle::print() {
+    r.print("Position:");
+    v.print("Velocity:");
+    std::cout << "Charge: " << q << "\nMass: " << m << std::endl;
 }
