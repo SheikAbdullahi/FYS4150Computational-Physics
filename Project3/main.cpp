@@ -18,5 +18,11 @@ int main() {
     arma::vec force = myTrap.total_force(0);
     force.print("Total force on particle 1:");
 
+    // Evolve the system using Forward Euler
+    myTrap.evolve_forward_euler(1e-5);  // for a 0.00001 second time step
+
+    // Evolve the system using RK4
+    myTrap.evolve_RK4(1e-5);  // for a 0.00001 second time step
+
     return 0;
 }
