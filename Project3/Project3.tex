@@ -1,0 +1,309 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{booktabs} % for professional tables
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{listings}
+\pdfcompresslevel=0
+
+\title{FYS3150/FYS4150 – Computational Physics University of Oslo}
+\author{Abdullahi Hassan Sheik}
+\date{October 2023}
+
+\begin{document}
+
+\maketitle
+
+\paragraph{}
+The complete implementation for this project is available on my GitHub repository. You can access it \href{https://github.com/SheikAbdullahi/FYS4150Computational-Physics/tree/main/Project3}{here}.
+
+\section{Problem 1}
+
+
+To tackle Problem 1, our first step is to unpack the equations of motion for a solitary particle navigating a Penning trap. This task calls for the employment of Newton's second law. Our ultimate goal? To unravel the mysteries of motion in the z-direction. Let's kick things off by defining the Lorentz force, followed closely by the electric field spawned by the potential at hand.
+
+\begin{enumerate}
+    \item \textbf{Lorentz Force}:\\
+    The problem clues us into the Lorentz force acting on our charged particle, precisely described by \(\mathbf{F} = q(\mathbf{E} + \mathbf{v} \times \mathbf{B})\).
+    
+    \item \textbf{Electric Field}:\\
+    Our electric field is born from the potential's gradient, specifically, \(V(x, y, z) = \frac{V_0}{2d^2}(2z^2 - x^2 - y^2)\). This leads us to \(\mathbf{E} = -\nabla V\). Diving into the components of \(\mathbf{E}\), we discover:
+    \begin{align*}
+    E_x &= -\frac{\partial V}{\partial x} = \frac{qV_0}{d^2}x,\\
+    E_y &= -\frac{\partial V}{\partial y} = \frac{qV_0}{d^2}y,\\
+    E_z &= -\frac{\partial V}{\partial z} = -\frac{2qV_0}{d^2}z.
+    \end{align*}
+    
+    \item \textbf{Magnetic Field}:\\
+    Here, the magnetic field stands unchanging, defined by \(\mathbf{B} = (0, 0, B_0)\).
+\end{enumerate}
+
+Turning to Newton's second law, we scribe the equations of motion along the \(x\), \(y\), and \(z\) axes. Our particle's velocity components—\(\dot{x}\), \(\dot{y}\), and \(\dot{z}\)—play a starring role, alongside the Lorentz force components \(F_x\), \(F_y\), and \(F_z\).
+
+Zeroing in on the \(x\)-direction, we have:
+\[
+m\ddot{x} = F_x = qE_x + q(\dot{y}B_0 - 0),
+\]
+simplifying to:
+\[
+\ddot{x} = \frac{qV_0}{md^2}x + \frac{qB_0}{m}\dot{y}.
+\]
+
+In the \(y\)-direction:
+\[
+m\ddot{y} = F_y = qE_y - q(\dot{x}B_0),
+\]
+which boils down to:
+\[
+\ddot{y} = \frac{qV_0}{md^2}y - \frac{qB_0}{m}\dot{x}.
+\]
+
+And for the \(z\)-direction:
+\[
+m\ddot{z} = F_z = qE_z = -\frac{2qV_0}{d^2}z,
+\]
+simplifying to:
+\[
+\ddot{z} = -\frac{2qV_0}{md^2}z.
+\]
+
+At this juncture, we'll usher in the terms \(\omega_0 = \frac{qB_0}{m}\) and \(\omega_z^2 = \frac{2qV_0}{md^2}\), reworking our equations into their designated form.
+
+Post-substitution, our equations take the shape of:
+\begin{align*}
+\ddot{x} - \omega_0 \dot{y} - \frac{1}{2}\omega_z^2 x &= 0,\\
+\ddot{y} + \omega_0 \dot{x} - \frac{1}{2}\omega_z^2 y &= 0,\\
+\ddot{z} + \omega_z^2 z &= 0.
+\end{align*}
+
+Behold, the sought-after equations of motion.
+
+Now, our attention shifts to the equation governing the \(z\)-direction, epitomizing simple harmonic motion:
+\[
+\ddot{z} + \omega_z^2 z = 0.
+\]
+
+This second-order differential equation's general solution? Voilà:
+\[
+z(t) = A \cos(\omega_z t + \phi),
+\]
+
+where \(A\) oscillates as the motion's amplitude (shaped by initial conditions), while \(\phi\) emerges as the phase constant (also sculpted by initial conditions). Herein lies a depiction of harmonic oscillation in the \(z\)-direction, dancing to the frequency of \(\omega_z\).
+
+\section{Problem 2}
+
+Alright, time to dive into Problem 2! Our mission? To shine a spotlight on a complex function, \(f(t) = x(t) + iy(t)\), and unveil the magic trick of transforming the coupled differential equations for \(x(t)\) and \(y(t)\) into a solo performance—a single differential equation for \(f(t)\).
+
+So, let's get the ball rolling by reflecting on our equations through the lens of our complex function \(f(t)\):
+
+\begin{enumerate}
+    \item Plucked from our first equation, we uncover:
+    \begin{equation}
+    \label{eq:x_eq} % Assigning a label for cross-referencing
+    \ddot{x} - \omega_0 \dot{y} - \frac{1}{2}\omega_z^2 x = 0.
+    \end{equation}
+
+    \item While our second equation bestows upon us:
+    \begin{equation}
+    \label{eq:y_eq} % Assigning a label for cross-referencing
+    \ddot{y} + \omega_0 \dot{x} - \frac{1}{2}\omega_z^2 y = 0.
+    \end{equation}
+\end{enumerate}
+
+As we see in equation \ref{eq:x_eq}, ...
+
+
+With \(f(t) = x(t) + iy(t)\) in our toolbox, we can elegantly express the derivatives of \(f\) as follows:
+
+\begin{itemize}
+    \item \( \dot{f}(t) = \dot{x}(t) + i\dot{y}(t) \)
+    \item \( \ddot{f}(t) = \ddot{x}(t) + i\ddot{y}(t) \)
+\end{itemize}
+
+Here's an interesting thought: what if we multiply our second equation by \(i\) (our imaginary comrade) and then add the outcome to the first equation? Well, it's a stroke of genius because mixing up any linear combination of two homogeneous differential equations gifts us a valid homogeneous differential equation. And why \(i\), you ask? It's the secret sauce that marries the real and imaginary parts just right.
+
+So, giving the second equation an \(i\) twist, we get:
+
+\begin{equation}
+i\ddot{y} + i\omega_0 \dot{x} - \frac{i}{2}\omega_z^2 y = 0.
+\end{equation}
+
+Add this beauty to the first equation, and voilà:
+
+\begin{equation}
+\ddot{x} - \omega_0 \dot{y} - \frac{1}{2}\omega_z^2 x + i\ddot{y} + i\omega_0 \dot{x} - \frac{i}{2}\omega_z^2 y = 0.
+\end{equation}
+
+Let's play matchmaker and pair up real and imaginary parts:
+
+\begin{equation}
+\ddot{x} + i\omega_0 \dot{x} - \frac{1}{2}\omega_z^2 x + i(\ddot{y} - \omega_0 \dot{y} - \frac{1}{2}\omega_z^2 y) = 0.
+\end{equation}
+
+Which is nothing but:
+
+\begin{equation}
+\ddot{f} + i\omega_0 \dot{f} - \frac{1}{2}\omega_z^2 f = 0.
+\end{equation}
+
+We've landed on a single, sleek differential equation for our complex function \(f(t)\). And that mysterious complex term \(i\omega_0 \dot{f}\)? Well, it's the magnetic field's way of waving hello, adding a dash of phase shift into the motion mix.
+
+
+
+\section{Problem 3}
+
+To paint a clearer picture, imagine we're aiming for a solution where the motion stays well-behaved and doesn't spiral out of control in the \(xy\)-plane, specifically \(|f(t)| < \infty\) even as \(t\) heads off to infinity. This means we're looking for exponents in our time-dependent solution \(f(t)\) that have real parts either sitting at zero or tipping into the negative. If these exponents get too peppy and venture into positive territory, our terms \(e^{-i(\omega_+ t + \phi_+)}\) and \(e^{-i(\omega_- t + \phi_-)}\) would race off to infinity as \(t\) grows, leaving us with a solution that's, well, not much of a solution at all.
+
+So, our general solution for \(f(t)\) looks something like this:
+
+\begin{equation}
+f(t) = A_+ e^{-i(\omega_+ t + \phi_+)} + A_- e^{-i(\omega_- t + \phi_-)},
+\end{equation}
+
+Here, \(\omega_+\) and \(\omega_-\) are the characters we need to keep an eye on:
+
+\begin{equation}
+\omega_\pm = \frac{\omega_0 \pm \sqrt{\omega_0^2 - 2\omega_z^2}}{2}.
+\end{equation}
+
+Now, for our solution to stay bounded (read: sane), these frequencies \(\omega_+\) and \(\omega_-\) need to either be purely imaginary or real party-poopers (non-positive). This keeps our \(e^{-i(\omega_\pm t + \phi_\pm)}\) terms from throwing a never-ending growth party.
+
+Here’s the twist: the condition for \(\omega_+\) and \(\omega_-\) to stick to the imaginary is that the expression under the square root plays nice and dips below zero, like so:
+
+\begin{equation}
+\omega_0^2 - 2\omega_z^2 < 0.
+\end{equation}
+
+Shuffling this around gives us:
+
+\begin{equation}
+\omega_0^2 < 2\omega_z^2.
+\end{equation}
+
+Let's circle back to our definitions \(\omega_0 = \frac{qB_0}{m}\) and \(\omega_z^2 = \frac{2qV_0}{md^2}\), and plug them into our inequality:
+
+\begin{equation}
+\left(\frac{qB_0}{m}\right)^2 < 2\left(\frac{2qV_0}{md^2}\right).
+\end{equation}
+
+Cracking this puzzle for the Penning trap’s specifics gives us a golden rule connecting \(B_0\), \(V_0\), and \(d\) with \(m\) and \(q\) to guarantee our trajectory doesn't go off the rails:
+
+\begin{equation}
+\frac{q^2B_0^2}{m^2} < \frac{4qV_0}{md^2}.
+\end{equation}
+
+Or, in other words,
+
+\begin{equation}
+B_0^2 < \frac{4mV_0}{qd^2}.
+\end{equation}
+
+This nugget of wisdom essentially tells us there's a ceiling on how strong our magnetic field \(B_0\) can be, depending on the electric potential \(V_0\), the trap's size \(d\), and the particle's charge-to-mass ratio \(q/m\). If \(B_0\) flexes too hard compared to the electric field, considering what our particle brings to the table, we end up with a trajectory that’s more scribble than circle in the \(xy\)-plane.
+
+\section{Problem 4}
+
+Problem 4 is steering us into exploring the farthest and nearest a particle can get from the origin in the xy-plane, captured by \(R_+ = A_+ + A_-\) and \(R_- = |A_+ - A_-|\). Picture these as the largest and smallest circles the particle draws as it dances around.
+
+First, let's break down the complex function \(f(t)\) into its real and imaginary parts, \(x(t)\) and \(y(t)\), like so:
+
+\[
+f(t) = x(t) + iy(t).
+\]
+
+Given the general solution,
+
+\[
+f(t) = A_+ e^{-i(\omega_+ t + \phi_+)} + A_- e^{-i(\omega_- t + \phi_-)},
+\]
+
+we see our particle's xy-plane shenanigans are the mash-up of two motions, each with its own "oomph" (\(A_+\) and \(A_-\)) and rhythm (\(\omega_+\) and \(\omega_-\)).
+
+Now, how far our particle is from the origin at any moment \(t\) depends on \(|f(t)|\) — think of it as the "volume" of our complex number \(f(t)\).
+
+\[
+|f(t)| = \sqrt{x(t)^2 + y(t)^2}.
+\]
+
+Our extreme distances, \(R_+\) and \(R_-\), pop up when our two motions either high-five (adding up for the max) or sulk in opposite corners (subtracting for the min). It's all about whether they're syncing up (for the max) or clashing (for the min).
+
+1. **The Farthest Reach \(R_+\):** This is when our particle is stretching its limits, maxing out the distance from the origin. It happens when both \(A_+\) and \(A_-\) ride the same wave, boosting each other. So, our max radius is like pooling their strengths:
+
+\[
+R_+ = |A_+| + |A_-| = A_+ + A_-,
+\]
+
+given \(A_+\) and \(A_-\) are the good guys (positive).
+
+2. **The Tightest Pull \(R_-\):** This is when our particle's playing it close to the origin, with \(A_+\) and \(A_-\) pulling in different directions. Here, the min radius is more of a tug-of-war:
+
+\[
+R_- = ||A_+| - |A_-|| = |A_+ - A_-|.
+\]
+
+The particle's swing limits in the xy-plane are indeed \(R_+ = A_+ + A_-\) for the "let's see how far we can go" and \(R_- = |A_+ - A_-|\) for the "playing it safe" scenarios.
+
+
+\section{Problem 5}
+
+
+{Problem 5} has been solved with C++.
+
+\section{Problem 6}
+
+\noindent We will design the \texttt{PenningTrap} class with the specified member variables and functions. We'll also include some additional functionalities to help manage the particles within the trap and calculate the forces as described.
+
+\begin{itemize}
+    \item First, the header file (\texttt{PenningTrap.h})
+    \item And the source file (\texttt{PenningTrap.cpp})
+\end{itemize}
+
+\noindent and then we change our \texttt{main.cpp} to instances of \texttt{PenningTrap} and \texttt{Particle}, demonstrating the use of the new methods.
+
+
+\section{Problem 7}
+
+To tackle Problem 7, we shall enrich our \texttt{PenningTrap} class with the Forward Euler and RK4 methods. These stalwarts of numerical integration lend their prowess to solving differential equations, with the Forward Euler method's simplicity and lesser accuracy contrasting with the RK4 method's complexity and heightened precision.
+
+\section*{Method Integration}
+We proceed by introducing two new member functions into our \texttt{PenningTrap} class: \texttt{evolve\_forward\_euler} and \texttt{evolve\_RK4}. Tasked with the monumental responsibility of updating the positions and velocities of all particles ensnared within the trap for each time step, these functions stand as pivotal additions to our class.
+
+
+We initiate our endeavor by revising the \texttt{PenningTrap.h} file, thereby making room for our new methods.
+
+
+\subsection*{Source File Update: PenningTrap.cpp}
+With our declarations set, we now delve into the \texttt{PenningTrap.cpp} file, breathing life into our methods with detailed definitions.
+
+With the integration of the Forward Euler and RK4 methods as member functions, our \texttt{PenningTrap} class leaps forward in sophistication, ready to accurately simulate particle dynamics through time with greater precision. Our journey through Problem 7 thus reaches fruition, marking a significant milestone in our ongoing scientific exploration.
+
+\section{Problem 8}
+
+Solved Problem 8, simulating particle dynamics in a Penning trap using Python. Involved simulation algorithm and diving into data analysis, using NumPy and Matplotlib libraries. 
+
+The results included detailed trajectory visualizations and comparisons between numerical methods, offering valuable insights into particle behavior within the trap.
+
+
+
+
+
+\section{Problem 9}
+Problem 9 entailed several tasks within a C++ framework: ensuring electric and magnetic fields are zero outside the trap, adding time variability to the electric field, counting particles within the trap, enabling/disabling Coulomb interactions, and initializing particles with random positions and velocities.
+
+
+The PenningTrap class was successfully updated to accommodate the required features. The following list highlights the primary modifications and their functionalities:
+\begin{itemize}
+    \item Zeroing fields outside the trap: The external\_electric\_field and external\_magnetic\_field methods now return zero vectors beyond a specified boundary, replicating the conditions outside a physical Penning trap.
+    \item Time-dependent electric field: The external\_electric\_field method incorporates time variability, modulated by additional parameters.
+    \item Particle counting: The count\_particles\_inside method enables real-time tracking of the number of particles within the trap.
+    \item Coulomb interaction toggle: The set\_coulomb method allows for the enabling or disabling of Coulomb interactions during simulations, providing more control over the experiment conditions.
+    \item Random particle initialization: The add\_random\_particles method facilitates the generation of particles with random positions and velocities within specified ranges.
+\end{itemize}
+
+With these enhancements, Problem 9 is considered solved. The implemented functionalities not only optimize the Penning trap simulation but also expand its utility for diverse computational experiments.
+
+\end{document}
+
+
